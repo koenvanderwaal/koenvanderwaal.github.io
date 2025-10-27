@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>lqa-card-interaction-prototype</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <style>
       html, body {
         margin: 0;
@@ -32,16 +32,21 @@
     </div>
     <script src="Build/build.loader.js"></script>
     <script>
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      const canvas = document.querySelector("#unity-canvas");
+      const config = {
         dataUrl: "Build/build.data",
         frameworkUrl: "Build/build.framework.js",
         codeUrl: "Build/build.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "&ranj",
+        companyName: "&amp;ranj",
         productName: "lqa-card-interaction-prototype",
         productVersion: "0.1",
         matchWebGLToCanvasSize: true,
-		devicePixelRatio: window.devicePixelRatio || 1
+        devicePixelRatio: window.devicePixelRatio || 1
+      };
+
+      createUnityInstance(canvas, config).catch((message) => {
+        console.error(message);
       });
     </script>
   </body>
