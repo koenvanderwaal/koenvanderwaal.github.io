@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>lqa-card-interaction-prototype</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
     <style>
       html, body {
         margin: 0;
@@ -30,31 +30,18 @@
     <div id="unity-container">
       <canvas id="unity-canvas" tabindex="-1"></canvas>
     </div>
-
-    <!-- Load the Unity loader script -->
     <script src="Build/build.loader.js"></script>
-
     <script>
-      window.addEventListener("load", () => {
-        if (typeof createUnityInstance === "undefined") {
-          console.error("Unity loader not found. Check that Build/build.loader.js exists and is spelled correctly.");
-          return;
-        }
-
-        const canvas = document.querySelector("#unity-canvas");
-        const config = {
-          dataUrl: "Build/build.data",
-          frameworkUrl: "Build/build.framework.js",
-          codeUrl: "Build/build.wasm",
-          streamingAssetsUrl: "StreamingAssets",
-          companyName: "&amp;ranj",
-          productName: "lqa-card-interaction-prototype",
-          productVersion: "0.1",
-          matchWebGLToCanvasSize: true,
-          devicePixelRatio: window.devicePixelRatio || 1
-        };
-
-        createUnityInstance(canvas, config).catch(console.error);
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/build.data",
+        frameworkUrl: "Build/build.framework.js",
+        codeUrl: "Build/build.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "&ranj",
+        productName: "lqa-card-interaction-prototype",
+        productVersion: "0.1",
+        matchWebGLToCanvasSize: true,
+		devicePixelRatio: window.devicePixelRatio || 1
       });
     </script>
   </body>
