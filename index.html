@@ -23,6 +23,7 @@
         height: 100%;
         background: #231F20;
         display: block;
+        image-rendering: pixelated; /* crisper visuals on high DPI */
       }
     </style>
   </head>
@@ -30,9 +31,22 @@
     <div id="unity-container">
       <canvas id="unity-canvas" tabindex="-1"></canvas>
     </div>
+
     <script src="Build/build.loader.js"></script>
     <script>
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      const canvas = document.querySelector("#unity-canvas");
+      const pixelRatio = window.devicePixelRatio || 1;
+
+      // Set canvas resolution based on physical pixel density
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth * pixelRatio;
+        canvas.height = canvas.clientHeight * pixelRatio;
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      createUnityInstance(canvas, {
         dataUrl: "Build/build.data",
         frameworkUrl: "Build/build.framework.js",
         codeUrl: "Build/build.wasm",
@@ -40,8 +54,8 @@
         companyName: "&ranj",
         productName: "lqa-card-interaction-prototype",
         productVersion: "0.1",
-        matchWebGLToCanvasSize: true,
-		devicePixelRatio: window.devicePixelRatio || 1
+        matchWebGLToCanvasSize: false, // manual control of render scaling
+        devicePixelRatio: pixelRatio
       });
     </script>
   </body>
